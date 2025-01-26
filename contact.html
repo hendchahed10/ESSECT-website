@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="essect.css">
+    <title>Formulaire de Contact</title>
+    <script type="text/javascript">
+        function verif(){
+            //event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const level = document.getElementById('level').value;
+            const message = document.getElementById('message').value.trim();
+            const terms = document.getElementById('terms').checked;
+            const sexe= document.querySelector('input[name="sexe"]:checked');
+            let valide=true;
+            if (name == "") {
+               alert("Le champ 'Nom et Prénom' est obligatoire !");
+                valide=false}
+            if (!sexe) {
+                 alert("Veuillez sélectionner votre sexe!");
+                valide = false;
+            }
+
+            if (level == "") {
+                alert("Veuillez sélectionner votre niveau d'étude!");
+                valide=false
+            }
+
+            
+            if (message == "") { 
+             alert("Le champ 'Message' est obligatoire!");
+             valide=false
+            }
+
+        
+            if (!terms) {
+                alert("Vous devez accepter les termes pour soumettre le formulaire !");
+                valide=false
+            }
+            if (valide==true)
+            {
+                if (sexe=="Mascuin")
+                    {alert("Mr."+name+" , votre message a bien été reçu. Nous vous répondrons très bientôt.");}
+                else
+                    {alert("Mlle."+name+" , votre message a bien été reçu. Nous vous répondrons très bientôt.");} 
+        } 
+    }
+        </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><img src="logo.jpg" height="70" style="float: right; position: relative;  top: -20px;"></li>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="programmes.html">Programmes d'études</a></li>
+                <li><a href="evenements.html">Evénements</a></li>
+                <li><a href="calendrier.html">Calendrier</a></li>
+                <li><a href="forum.html">Forum de discussion</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="activités.html">Activités & Clubs étudiants</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="contact">
+        <h1 style="text-align: center; color: #555;">Formulaire de Contact</h1><br><br>
+        <p id="formdescription">Utilisez ce formulaire pour poser vos questions ou fournir des commentaires.</p>
+
+        <form onsubmit="verif()" style="background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        
+            <label for="name">Nom et Prénom :</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label>Sexe :</label>
+            <label> 
+            <input type="radio" id="M" name="sexe" value="Masculin">
+            Masculin</label>
+            <label>
+            <input type="radio" id="F" name="sexe" value="Féminin">
+            Féminin</label><br><br>
+            <label for="email">Adresse Email :</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phone">Numéro de Téléphone :</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="+216 99 123 456"><br><br>
+
+            <label for="level">Niveau d'Étude :</label><br>
+            <select id="level" name="level" required>
+                <option value="">-- **Sélectionnez votre niveau** --</option>
+                <option value="licence">Licence</option>
+                <option value="master">Master</option>
+                <option value="doctorat">Doctorat</option>
+            </select><br><br>
+
+            <label for="sujet">Sujet :</label><br>
+            <input type="text" id="subjet" name="sujet" placeholder="Ex: Problème d'inscription" required><br><br>
+
+        
+            <label for="message">Message :</label><br>
+            <textarea id="message" name="message" rows="5" placeholder="Expliquez votre question ou commentaire ici..." required></textarea><br><br>
+
+        
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">J'accepte que mes données soient utilisées pour traiter ma demande.</label><br><br>
+
+            <button type="submit">Envoyer</button>
+        </form>
+</main>
+<footer>
+    <p>&copy; 2024 ESSECT - Tous droits réservés.</p>
+    <p>Contactez-nous : <a href="mailto:info@universite.edu">info@universite.edu</a></p>
+</footer>
+</body>
+</html>

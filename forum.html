@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="essect.css">
+    <title>Forum</title>
+    <script type="text/javascript">
+        let i=3; //valeur qui indique le nombre de posts et qui est incrémentée dès qu'un nouveau post est créé
+        function commenter(i) //i est passée en paramètre pour assurer que le commenntaire est inséré dans le bon post (assurer le choix des bons textarea et div)
+        {
+            const commlist=document.getElementById(`comments${i}`); //liste des commentaires d'un post
+            const comm=document.getElementById(`comm${i}`); //le nouveau commentaire
+            if (comm.value!="")
+            {
+                const commentElement = document.createElement("div"); //pour creer un nouvel element "div" dans la page
+                commentElement.innerHTML = `<p style="font-weight:bold;">Commentaire :</p>
+                <p>${comm.value.trim()}</p><br>`; //pour ajouter le nouveau commentaire dans le "div" créé
+                commlist.appendChild(commentElement); //pour ajouter le nouveau commentaire a la section commentaire
+                comm.value=""; //pour reinitialiser le contenu de la "text area" une fois le commentaire envoye
+            }
+            else {
+                alert("Commentez quelque chose avant d'envoyer!"); //s'execute dans le cas ou l'utilisateur clique sur "envoyer" en n'ayant rien ecrit dans la "text area"
+        }
+    }
+        function post (){ //fonction pour ajouter un post à la page lors du click sur "Publier"
+            const titre=document.getElementById("titrepost").value; //titre du nouveau post
+            const txt=document.getElementById("txt").value; //corps du nouveau post
+            const postlist=document.getElementById("postlist"); //liste de tous les posts
+            if(titre=="")
+                {alert("Veillez donner un titre pour le post !")}
+            else if(txt=="")
+                {alert("Ecrivez quelque chose avant de poster !");}
+            else{
+                i++; //incrémentation de la variable i pour indiquer qu'un nouveau post a été créé
+                const divElement = document.createElement("div"); //pour creer un nouvel element "div" dans la page
+                divElement.classList.add("postsforum");
+                divElement.innerHTML=`<h2 style="font-weight:bold;">Sujet ${i} : ${titre}</h2>
+                <p>${txt}<p>
+                <textarea name="comment" id="comm${i}" placeholder="Ecrivez un commentaire"></textarea><br>
+                <button onclick="commenter(${i})">Envoyer</button>
+                <div id="comments${i}"></div>`; /*pour inclure le nouveau post dans la page dans le nouveau "div" créé, avec son titre, sons corps,
+                    mais aussi une section commentaire*/
+                postlist.appendChild(divElement); //pour ajouter le nouveau post à la page
+                titre=""; //pour réinitialiser la textbox du titre une fois le post publié
+                txt=""; //pour réinitialiser la textarea du corps du post une fois le post publié
+                }
+        }
+       
+            
+            function effacer(){ 
+                document.getElementById("titrepost").value="";
+                document.getElementById("txt").value="";
+            }
+        
+        
+    </script>
+</head>
+<body>
+    <div id>
+    <header>
+        <nav>
+            <ul>
+                <li><img src="logo.jpg" height="70" style="float: right; position: relative;  top: -20px;"></li>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="programmes.html">Programmes d'études</a></li>
+                <li><a href="evenements.html">Evénements</a></li>
+                <li><a href="calendrier.html">Calendrier</a></li>
+                <li><a href="forum.html">Forum de discussion</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="activités.html">Activités & Clubs étudiants</a></li>
+            </ul>
+        </nav>
+    </header>
+        <main>
+                <label id="exp">Exprimez-vous~</label><br>
+                <textarea name="titre" rows="1" cols="1" id="titrepost" placeholder="TITRE DU POST"></textarea>
+                <textarea name="texte" rows="5" cols="33" id="txt" placeholder="Ecrivez votre message..."></textarea><br> 
+                <button  class="boutons" style="margin-left: 700px;" onclick="effacer()">Réinitialiser</button>
+                <button class="boutons" style="margin-left: 900px; position: relative; top: -42px;"onclick="post()">Publier</button>
+            <h1 style="font-family: cursive; font-weight: bold; color: rgb(200, 107, 144);"> >> Anciennes discussions :</h1>
+                <div id="postlist">
+                    <div class="postsforum">
+                        <h2>Sujet 1 : Quelles sont vos astuces pour bien réviser pendant les périodes d'examens ?</h2>
+                        <p>Je voulais connaître vos différentes méthodes et façons de faire pour mener une révision efficace et réussie </p><br>
+                        <textarea name="comment" id="comm1" placeholder="Ecrivez un commentaire"></textarea><br>
+                        <button onclick="commenter(1)">Envoyer</button>
+                        <div id="comments1"></div>
+                    </div>
+                    <div class="postsforum">
+                    <h2>Sujet 2 : Où est-ce qu'on vend de la bonne nourriture près de la fac ?</h2>
+                        <p>Je suis en 1ère année et depuis la rentrée je n'arrive pas à trouver un grand choix en ce qui concerne les 
+                            restaurants près de la fac haha<br>
+                            Je voulais savoir si certains d'entre vous en connaitraîent des bons à proximité de la fac.
+                        </p><br>
+                        <textarea name="comment" id="comm2" placeholder="Ecrivez un commentaire"></textarea><br>
+                        <button onclick="commenter(2)">Envoyer</button>
+                        <div id="comments2"></div>
+                    </div>
+                    <div class="postsforum">
+                        <h2>Sujet 3 : Je veux me renseigner à propos du transport de la fac</h2>
+                            <p>Je suis nouvelle à la fac et je ne suis pas assez renseignée sur le transport dans la zone. J'ai peur d'en prendre
+                                et me tromper
+                                Qu'il y a-t-il exactement comme moyen de transport ici ? Et que me conseillez-vous de prendre ?
+                            </p><br>
+                            <textarea name="comment" id="comm3" placeholder="Ecrivez un commentaire"></textarea><br>
+                            <button type="button" onclick="commenter(3)">Envoyer</button>
+                            <div id="comments3"></div>
+                    </div>
+                </div>
+        </main>
+    </div>
+</body>
+</html>
